@@ -18,7 +18,8 @@ import argparse
 import logging
 import os
 
-from pathos.multiprocessing import ProcessingPool as Pool
+#from pathos.multiprocessing import ProcessingPool as Pool
+from multiprocessing.dummy import Pool
 
 import librosa
 import numpy as np
@@ -311,7 +312,7 @@ def main():
         pbar.update(1)
 
     # apply multi-processing Pool
-    p = Pool(nodes=args.n_cpus)
+    p = Pool()
     p.map(save_to_file, range(len(processor.items)))
     pbar.close()
 
